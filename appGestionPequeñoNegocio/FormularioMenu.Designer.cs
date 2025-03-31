@@ -46,6 +46,9 @@
             this.txtStock = new System.Windows.Forms.TextBox();
             this.lblEliminar = new System.Windows.Forms.Label();
             this.txtCodigoEliminar = new System.Windows.Forms.TextBox();
+            this.label1 = new System.Windows.Forms.Label();
+            this.txtModificar = new System.Windows.Forms.TextBox();
+            this.btnModificar = new System.Windows.Forms.Button();
             ((System.ComponentModel.ISupportInitialize)(this.dgvDatos)).BeginInit();
             this.SuspendLayout();
             // 
@@ -55,9 +58,9 @@
             this.lblTitulo.Font = new System.Drawing.Font("Microsoft Sans Serif", 14.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.lblTitulo.Location = new System.Drawing.Point(35, 9);
             this.lblTitulo.Name = "lblTitulo";
-            this.lblTitulo.Size = new System.Drawing.Size(206, 24);
+            this.lblTitulo.Size = new System.Drawing.Size(189, 24);
             this.lblTitulo.TabIndex = 0;
-            this.lblTitulo.Text = "ABM para tu negocio";
+            this.lblTitulo.Text = "ABM de tu negocio";
             // 
             // btnCargar
             // 
@@ -79,9 +82,9 @@
             // dgvDatos
             // 
             this.dgvDatos.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-            this.dgvDatos.Location = new System.Drawing.Point(252, 50);
+            this.dgvDatos.Location = new System.Drawing.Point(210, 50);
             this.dgvDatos.Name = "dgvDatos";
-            this.dgvDatos.Size = new System.Drawing.Size(507, 292);
+            this.dgvDatos.Size = new System.Drawing.Size(549, 292);
             this.dgvDatos.TabIndex = 3;
             this.dgvDatos.CellContentClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.dgvDatos_CellContentClick);
             // 
@@ -201,11 +204,39 @@
             this.txtCodigoEliminar.Size = new System.Drawing.Size(144, 20);
             this.txtCodigoEliminar.TabIndex = 16;
             // 
+            // label1
+            // 
+            this.label1.AutoSize = true;
+            this.label1.Location = new System.Drawing.Point(207, 356);
+            this.label1.Name = "label1";
+            this.label1.Size = new System.Drawing.Size(154, 13);
+            this.label1.TabIndex = 20;
+            this.label1.Text = "Código de producto a modificar";
+            // 
+            // txtModificar
+            // 
+            this.txtModificar.Location = new System.Drawing.Point(210, 372);
+            this.txtModificar.Name = "txtModificar";
+            this.txtModificar.Size = new System.Drawing.Size(144, 20);
+            this.txtModificar.TabIndex = 19;
+            // 
+            // btnModificar
+            // 
+            this.btnModificar.Location = new System.Drawing.Point(372, 370);
+            this.btnModificar.Name = "btnModificar";
+            this.btnModificar.Size = new System.Drawing.Size(75, 23);
+            this.btnModificar.TabIndex = 18;
+            this.btnModificar.Text = "Modificar";
+            this.btnModificar.UseVisualStyleBackColor = true;
+            // 
             // FormularioMenu
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(800, 450);
+            this.Controls.Add(this.label1);
+            this.Controls.Add(this.txtModificar);
+            this.Controls.Add(this.btnModificar);
             this.Controls.Add(this.lblEliminar);
             this.Controls.Add(this.txtCodigoEliminar);
             this.Controls.Add(this.lblStock);
@@ -225,7 +256,7 @@
             this.Controls.Add(this.btnCargar);
             this.Controls.Add(this.lblTitulo);
             this.Name = "FormularioMenu";
-            this.Text = "Form1";
+            this.Text = "Gestion de productos";
             this.Load += new System.EventHandler(this.FormularioMenu_Load);
             ((System.ComponentModel.ISupportInitialize)(this.dgvDatos)).EndInit();
             this.ResumeLayout(false);
@@ -253,6 +284,9 @@
         private System.Windows.Forms.TextBox txtStock;
         private System.Windows.Forms.Label lblEliminar;
         private System.Windows.Forms.TextBox txtCodigoEliminar;
+        private System.Windows.Forms.Label label1;
+        private System.Windows.Forms.TextBox txtModificar;
+        private System.Windows.Forms.Button btnModificar;
     }
 }
 
