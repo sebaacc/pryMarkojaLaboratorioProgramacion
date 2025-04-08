@@ -111,7 +111,6 @@ namespace appGestionPequeñoNegocio
             }
             catch (Exception ex)
             {
-                // Maneja cualquier error inesperado
                 MessageBox.Show("Ocurrió un error al eliminar el producto: " + ex.Message, "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
             }
         }
@@ -123,7 +122,37 @@ namespace appGestionPequeñoNegocio
 
         private void btnEliminar_Click(object sender, EventArgs e)
         {
-            eliminar();
+            if (!string.IsNullOrEmpty(txtCodigoEliminar.Text)) { 
+                DialogResult resultado1 = MessageBox.Show("¿Estás seguro de que deseas eliminar este elemento?",
+                                                        "Confirmar eliminación",
+                                                        MessageBoxButtons.YesNo,
+                                                        MessageBoxIcon.Warning);
+
+                if (resultado1 == DialogResult.Yes)
+                {
+                    DialogResult resulto2 = MessageBox.Show("¿Estás seguro de que deseas eliminarlo definitivamente?",
+                                                            "Confirmar eliminación final",
+                                                            MessageBoxButtons.YesNo,
+                                                            MessageBoxIcon.Warning);
+                    if (resulto2 == DialogResult.Yes)
+                    {
+                        eliminar();
+                        MessageBox.Show("Elemento eliminado correctamente.", "Eliminación exitosa", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                    }
+                    else
+                    {
+                        MessageBox.Show("Eliminación cancelada.", "Operación cancelada", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                    }
+                }
+                else
+                {
+                    MessageBox.Show("Eliminación cancelada.", "Operación cancelada", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                }
+            }
+            else
+            {
+                MessageBox.Show("Por favor, ingrese un código de elemento para eliminar.");
+            }
         }
     }
 }
