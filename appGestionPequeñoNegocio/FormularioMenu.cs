@@ -17,9 +17,10 @@ namespace appGestionPequeñoNegocio
             InitializeComponent();
         }
 
-        string codigo;
-        string nombre;
-        string descripcion;
+        String codigo;
+        String nombre;
+        String descripcion;
+        String categoria;
         decimal precio;
         int stock;
 
@@ -34,6 +35,7 @@ namespace appGestionPequeñoNegocio
             dgvDatos.Columns.Add("Nombre", "Nombre");
             dgvDatos.Columns.Add("Descripcion", "Descripción");
             dgvDatos.Columns.Add("Precio", "Precio");
+            dgvDatos.Columns.Add("Categoria", "Categoría");
             dgvDatos.Columns.Add("Stock", "Stock");
         }
 
@@ -45,37 +47,29 @@ namespace appGestionPequeñoNegocio
         {
             try
             {
-                // Captura los datos de los TextBox y los guarda en las variables
-                codigo = txtNombre.Text;
+                codigo = txtCodigo.Text;
                 nombre = txtNombre.Text;
                 descripcion = txtDescripcion.Text;
-                precio = decimal.Parse(txtPrecio.Text); // Convierte el texto a decimal
-                stock = int.Parse(txtStock.Text); // Convierte el texto a entero
+                precio = decimal.Parse(txtPrecio.Text);
+                categoria = txtCategoria.Text; 
+                stock = int.Parse(txtStock.Text); 
 
-                // Opcional: Puedes agregar aquí validaciones adicionales
-                // Por ejemplo, verificar que los TextBox no estén vacíos, etc.
+                dgvDatos.Rows.Add(codigo, nombre, descripcion, precio, categoria, stock);
 
-                // Agrega una fila al DataGridView con los datos capturados
-                dgvDatos.Rows.Add(codigo, nombre, descripcion, precio, stock);
-
-                // Opcional: Limpia los TextBox después de agregar la fila
                 txtNombre.Text = "";
-                txtNombre.Text = "";
+                txtCodigo.Text = "";
                 txtDescripcion.Text = "";
                 txtPrecio.Text = "";
+                txtCategoria.Text = "";
                 txtStock.Text = "";
             }
             catch (FormatException ex)
             {
-                // Maneja el error si el usuario ingresa datos no válidos (por ejemplo, texto en un campo numérico)
-                MessageBox.Show("Error: Ingresa datos válidos en los campos numéricos.", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
-                // Opcional: Puedes registrar el error en un archivo de registro, etc.
+                MessageBox.Show("Error: Ingresa datos válidos en los campos numéricos. "+ex.Message, "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
             }
             catch (Exception ex)
             {
-                // Maneja cualquier otro error inesperado
                 MessageBox.Show("Ocurrió un error inesperado: " + ex.Message, "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
-                // Opcional: Puedes registrar el error en un archivo de registro, etc.
             }
         }
 
@@ -84,7 +78,7 @@ namespace appGestionPequeñoNegocio
             try
             {
                 // Obtiene el código a eliminar del TextBox
-                string codigoEliminar = txtCodigoEliminar.Text;
+                String codigoEliminar = txtCodigoEliminar.Text;
 
                 // Itera a través de las filas del DataGridView
                 foreach (DataGridViewRow row in dgvDatos.Rows)
@@ -92,12 +86,9 @@ namespace appGestionPequeñoNegocio
                     // Verifica si el código de la fila coincide con el código a eliminar
                     if (row.Cells["Codigo"].Value != null && row.Cells["Codigo"].Value.ToString() == codigoEliminar)
                     {
-                        // Elimina la fila
                         dgvDatos.Rows.Remove(row);
 
-                        // Opcional: Muestra un mensaje de confirmación
-                        MessageBox.Show("Producto con código " + codigoEliminar + " eliminado.", "Información", MessageBoxButtons.OK, MessageBoxIcon.Information);
-
+                        MessageBox.Show("Producto con código " + codigoEliminar + " eliminado.", "Eliminación exitosa", MessageBoxButtons.OK, MessageBoxIcon.Information);
                         // Limpia el TextBox de código a eliminar.
                         txtCodigoEliminar.Text = "";
 
@@ -114,7 +105,31 @@ namespace appGestionPequeñoNegocio
                 MessageBox.Show("Ocurrió un error al eliminar el producto: " + ex.Message, "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
             }
         }
+        private void eliminar(String codigoEliminar)
+        {
+            try
+            {
+                foreach (DataGridViewRow row in dgvDatos.Rows)
+                {
+                    if (row.Cells["Codigo"].Value != null && row.Cells["Codigo"].Value.ToString() == codigoEliminar)
+                    {
+                        dgvDatos.Rows.Remove(row);
 
+                        MessageBox.Show("Producto con código " + codigoEliminar + " eliminado.", "Eliminación exitosa", MessageBoxButtons.OK, MessageBoxIcon.Information);
+               
+                        txtCodigoEliminar.Text = "";
+
+                        return;
+                    }
+                }
+
+                MessageBox.Show("No se encontró ningún producto con el código " + codigoEliminar + ".", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show("Ocurrió un error al eliminar el producto: " + ex.Message, "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+            }
+        }
         private void lblApellido_Click(object sender, EventArgs e)
         {
 
@@ -137,7 +152,6 @@ namespace appGestionPequeñoNegocio
                     if (resulto2 == DialogResult.Yes)
                     {
                         eliminar();
-                        MessageBox.Show("Elemento eliminado correctamente.", "Eliminación exitosa", MessageBoxButtons.OK, MessageBoxIcon.Information);
                     }
                     else
                     {
@@ -153,6 +167,49 @@ namespace appGestionPequeñoNegocio
             {
                 MessageBox.Show("Por favor, ingrese un código de elemento para eliminar.");
             }
+        }
+        private void modificar()
+        {
+            if(!string.IsNullOrEmpty(txtModificar.Text))
+            {
+                try
+                {
+                    foreach (DataGridViewRow fila in dgvDatos.Rows)
+                    {
+                        if (fila.IsNewRow) continue;
+
+                        if (fila.Cells[0].Value != null && fila.Cells[0].Value.ToString() == txtModificar.Text)
+                        {
+                            txtCodigo.Text = txtModificar.Text;
+                            txtNombre.Text = fila.Cells[1].Value?.ToString();
+                            txtDescripcion.Text = fila.Cells[2].Value?.ToString();
+                            txtPrecio.Text = fila.Cells[3].Value?.ToString();
+                            txtCategoria.Text = fila.Cells[4].Value?.ToString();
+                            txtStock.Text = fila.Cells[5].Value?.ToString();
+                            break;
+                        }
+                    }
+                    eliminar(txtModificar.Text);
+                    MessageBox.Show("Proceda a modificar los datos del producto y luego haga clic en cargar. De lo contrario, se perderan los datos.", "Información para modificar");
+                }
+                catch (FormatException ex)
+                {
+                    MessageBox.Show("Error: Ingresa un codigo válido. " + ex.Message, "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                }
+                catch (Exception ex)
+                {
+                    MessageBox.Show("Ocurrió un error inesperado: " + ex.Message, "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                }
+            }
+            else
+            {
+                MessageBox.Show("Por favor ingrese un código de producto existente.");
+            }
+        }
+
+        private void btnModificar_Click(object sender, EventArgs e)
+        {
+            modificar();
         }
     }
 }
