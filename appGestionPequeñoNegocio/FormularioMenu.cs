@@ -7,6 +7,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
+using pryGestionInventario;
 
 namespace appGestionPequeñoNegocio
 {
@@ -37,6 +38,9 @@ namespace appGestionPequeñoNegocio
             dgvDatos.Columns.Add("Precio", "Precio");
             dgvDatos.Columns.Add("Categoria", "Categoría");
             dgvDatos.Columns.Add("Stock", "Stock");
+
+            clsConexionBD objConectarBD = new clsConexionBD();
+            objConectarBD.ConectarBD();
         }
 
         private void btnCargar_Click(object sender, EventArgs e)
