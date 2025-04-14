@@ -81,27 +81,20 @@ namespace appGestionPequeñoNegocio
         {
             try
             {
-                // Obtiene el código a eliminar del TextBox
                 String codigoEliminar = txtCodigoEliminar.Text;
 
-                // Itera a través de las filas del DataGridView
                 foreach (DataGridViewRow row in dgvDatos.Rows)
                 {
-                    // Verifica si el código de la fila coincide con el código a eliminar
                     if (row.Cells["Codigo"].Value != null && row.Cells["Codigo"].Value.ToString() == codigoEliminar)
                     {
                         dgvDatos.Rows.Remove(row);
 
                         MessageBox.Show("Producto con código " + codigoEliminar + " eliminado.", "Eliminación exitosa", MessageBoxButtons.OK, MessageBoxIcon.Information);
-                        // Limpia el TextBox de código a eliminar.
                         txtCodigoEliminar.Text = "";
-
-                        // Sale del bucle, ya que se encontró y eliminó la fila
                         return;
                     }
                 }
 
-                // Si no se encontró el código, muestra un mensaje de error
                 MessageBox.Show("No se encontró ningún producto con el código " + codigoEliminar + ".", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
             }
             catch (Exception ex)
