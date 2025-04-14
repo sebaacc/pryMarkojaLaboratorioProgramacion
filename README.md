@@ -1,5 +1,6 @@
 # appGestionPequeñoNegocio  
-[Drive materia](https://drive.google.com/drive/folders/1-k4oxbVGNWbUpgAyixkdDi8mx5DpVMx5)
+[Drive materia](https://drive.google.com/drive/folders/1-k4oxbVGNWbUpgAyixkdDi8mx5DpVMx5)  
+
 Se crea la clase clsConexionBD.cs
 Luego ponemos esta librería al inicio:
 using System.Data.SqlClient;
