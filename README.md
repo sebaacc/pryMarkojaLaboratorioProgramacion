@@ -32,3 +32,11 @@ luego en frmMain o principal, en evento Load, hay que instanciar la base:
 
 Hay que abrir sql server, una vez abierto y a la carpeta Base de Datos, click derecho y "restaurar base de datos". Allí dentro seleccionar el archivo de BD que queremos abrir. Origen => dispositivo. Click en los puntos ... luego en "Agregar" y buscamos el archivo .bak . ACEPTAR, ACEPTAR, ACEPTAR. (Asegurarse de que el servicio sql este andando).
 
+consejos:
+usar focus() para luego de alguna accion focusear algun componente del form.
+El ejecutable solo puede andar en cualquier pc.
+cambiar el icono del form y del ejecutable mediante propiedades del proyecto.
+controles de control. enable false o true cuando la prop text_change esta completa o no.
+Un combobox tiene la prop DropdownLIST que al seleccionarla no deja escribir encima del combo box, solo seleccionar una opción.
+Para agregar un control manualmente desde el codigo hay ue hacer Controls.Add(MinuevoControl).
+Esto sirve para distintas situaciones x d
